@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rembo Rw · Irembo services</title>
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --card: #ffffff;
+        --ink: #101828;
+        --muted: #667085;
+        --line: #e4e7ec;
+        --brand: #1d4ed8;
+        --brand-soft: #eff4ff;
+        --ok: #067647;
+        --warn: #b42318;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          15px/1.55 system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+      }
+      header {
+        background: var(--brand);
+        color: #fff;
+        padding: 20px 16px;
+      }
+      header .wrap {
+        max-width: 940px;
+        margin: 0 auto;
+      }
+      h1 {
+        margin: 0 0 4px;
+        font-size: 20px;
+      }
+      header p {
+        margin: 0;
+        opacity: 0.85;
+        font-size: 13px;
+      }
+      main {
+        max-width: 940px;
+        margin: 0 auto;
+        padding: 20px 16px 60px;
+      }
+      .bar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      input[type="search"] {
+        flex: 1 1 280px;
+        padding: 12px 14px;
+        font-size: 16px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--card);
+      }
+      input[type="search"]:focus {
+        outline: 2px solid var(--brand);
+        outline-offset: 1px;
+        border-color: transparent;
+      }
+      .langs {
+        display: flex;
+        gap: 6px;
+      }
+      .langs button {
+        border: 1px solid var(--line);
+        background: var(--card);
+        color: var(--muted);
+        border-radius: 999px;
+        padding: 8px 14px;
+        font-size: 13px;
+        cursor: pointer;
+      }
+      .langs button.on {
+        background: var(--brand);
+        border-color: var(--brand);
+        color: #fff;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-top: 18px;
+      }
+      @media (min-width: 820px) {
+        .grid {
+          grid-template-columns: 320px 1fr;
+          align-items: start;
+        }
+      }
+      .panel {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .panel h2 {
+        margin: 0;
+        padding: 14px 16px;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        border-bottom: 1px solid var(--line);
+      }
+      ul.results {
+        list-style: none;
+        margin: 0;
+        padding: 6px;
+        max-height: 520px;
+        overflow: auto;
+      }
+      ul.results li button {
+        width: 100%;
+        text-align: left;
+        border: 0;
+        background: none;
+        padding: 10px 12px;
+        border-radius: 10px;
+        cursor: pointer;
+        font: inherit;
+      }
+      ul.results li button:hover,
+      ul.results li button.on {
+        background: var(--brand-soft);
+      }
+      .cat {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .detail {
+        padding: 18px;
+      }
+      .detail h3 {
+        margin: 0 0 4px;
+        font-size: 20px;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 14px 0;
+      }
+      .chip {
+        background: var(--brand-soft);
+        color: var(--brand);
+        border-radius: 8px;
+        padding: 6px 10px;
+        font-size: 13px;
+      }
+      .chip b {
+        font-weight: 600;
+      }
+      .detail h4 {
+        margin: 20px 0 8px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--muted);
+      }
+      .detail ol,
+      .detail ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+      .detail li {
+        margin: 4px 0;
+      }
+      .note {
+        background: #fffaeb;
+        border: 1px solid #fedf89;
+        color: #7a2e0e;
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 13px;
+        margin-top: 12px;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      .actions a,
+      .actions button {
+        border: 0;
+        border-radius: 10px;
+        padding: 11px 16px;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .primary {
+        background: var(--brand);
+        color: #fff;
+      }
+      .ghost {
+        background: var(--brand-soft);
+        color: var(--brand);
+      }
+      select {
+        font: inherit;
+        padding: 9px 12px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        background: #fff;
+        width: 100%;
+        margin-top: 6px;
+      }
+      .status {
+        padding: 24px 16px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .status.err {
+        color: var(--warn);
+      }
+      .hint {
+        color: var(--muted);
+        font-size: 13px;
+        margin-top: 8px;
+      }
+      .empty {
+        padding: 16px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <h1>Rembo Rw · Irembo service finder</h1>
+        <p>
+          Search IremboGov services and see requirements, processing time and fees. Live from
+          irembo.gov.rw.
+        </p>
+      </div>
+    </header>
+    <main>
+      <div class="bar">
+        <input
+          id="q"
+          type="search"
+          placeholder="Search a service, e.g. passport, birth certificate, name change"
+        />
+        <div class="langs" id="langs">
+          <button data-lang="en" class="on">English</button>
+          <button data-lang="fr">Français</button>
+          <button data-lang="rw">Kinyarwanda</button>
+        </div>
+      </div>
+      <p class="hint">Start typing (2+ characters) or leave it empty to browse all services.</p>
+
+      <div class="grid">
+        <section class="panel">
+          <h2>Results</h2>
+          <div id="results" class="empty">Type to search.</div>
+        </section>
+        <section class="panel">
+          <h2>Service details</h2>
+          <div id="detail" class="status">Choose a service to see its requirements.</div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      const state = { lang: "en", q: "", selected: null, timer: null, req: 0 };
+      const $ = (id) => document.getElementById(id);
+      const resultsEl = $("results");
+      const detailEl = $("detail");
+
+      const esc = (s) =>
+        String(s ?? "").replace(
+          /[&<>"']/g,
+          (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
+        );
+
+      $("langs").addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-lang]");
+        if (!btn) return;
+        state.lang = btn.dataset.lang;
+        [...$("langs").children].forEach((b) => b.classList.toggle("on", b === btn));
+        state.selected = null;
+        detailEl.className = "status";
+        detailEl.textContent = "Choose a service to see its requirements.";
+        search(true);
+      });
+
+      $("q").addEventListener("input", (e) => {
+        state.q = e.target.value;
+        clearTimeout(state.timer);
+        state.timer = setTimeout(() => search(false), 350);
+      });
+
+      async function search(reset) {
+        const q = state.q.trim();
+        if (!reset && q.length < 2) {
+          resultsEl.className = "empty";
+          resultsEl.textContent = "Type to search.";
+          return;
+        }
+        const token = ++state.req;
+        resultsEl.className = "empty";
+        resultsEl.textContent = "Searching Irembo…";
+        try {
+          const r = await fetch(`/api/search?q=${encodeURIComponent(q)}&lang=${state.lang}`);
+          const data = await r.json();
+          if (token !== state.req) return;
+          if (!r.ok) throw new Error(data.error || "Search failed");
+          renderResults(data.results, q);
+        } catch (e) {
+          if (token !== state.req) return;
+          resultsEl.className = "empty";
+          resultsEl.textContent = e.message;
+        }
+      }
+
+      function renderResults(results, q) {
+        if (!results.length) {
+          resultsEl.className = "empty";
+          resultsEl.textContent = q ? `No service matches “${q}”.` : "No services found.";
+          return;
+        }
+        const ul = document.createElement("ul");
+        ul.className = "results";
+        results.forEach((r) => {
+          const li = document.createElement("li");
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.innerHTML = `${esc(r.name)}<span class="cat">${esc(r.category || "")}</span>`;
+          if (state.selected === r.id) btn.classList.add("on");
+          btn.addEventListener("click", () => open(r.id));
+          li.appendChild(btn);
+          ul.appendChild(li);
+        });
+        resultsEl.className = "";
+        resultsEl.textContent = "";
+        resultsEl.appendChild(ul);
+      }
+
+      async function open(id, option) {
+        state.selected = id;
+        detailEl.className = "status";
+        detailEl.textContent =
+          "Fetching this service from Irembo… (first load can take ~15 seconds)";
+        const token = ++state.req;
+        try {
+          const url = `/api/service?id=${encodeURIComponent(id)}&lang=${state.lang}&option=${option || 0}`;
+          const r = await fetch(url);
+          const data = await r.json();
+          if (token !== state.req) return;
+          if (!r.ok) throw new Error(data.error || "Could not load this service");
+          renderDetail(data);
+        } catch (e) {
+          if (token !== state.req) return;
+          detailEl.className = "status err";
+          detailEl.textContent = e.message;
+        }
+      }
+
+      function listBlock(title, items) {
+        if (!items || !items.length) return "";
+        return `<h4>${esc(title)} (${items.length})</h4><ul>${items
+          .map((i) => `<li>${esc(i)}</li>`)
+          .join("")}</ul>`;
+      }
+
+      function renderDetail(d) {
+        const chips = [
+          d.duration && `<span class="chip"><b>Processing time:</b> ${esc(d.duration)}</span>`,
+          d.fee && `<span class="chip"><b>Price:</b> ${esc(d.fee)}</span>`,
+          d.provider && `<span class="chip"><b>Provided by:</b> ${esc(d.provider)}</span>`,
+          d.category && `<span class="chip">${esc(d.category)}</span>`,
+        ]
+          .filter(Boolean)
+          .join("");
+
+        const switcher =
+          d.options && d.options.length > 1
+            ? `<h4>Service type</h4><select id="opt">${d.options
+                .map(
+                  (o, i) =>
+                    `<option value="${i}" ${o === d.option ? "selected" : ""}>${esc(o)}</option>`,
+                )
+                .join("")}</select>`
+            : "";
+
+        const notes = (d.notes || []).map((n) => `<div class="note">${esc(n)}</div>`).join("");
+        const apply = d.url
+          ? `<a class="primary" href="${esc(d.url)}" target="_blank" rel="noopener">Open on Irembo</a>`
+          : `<a class="primary" href="${esc(d.listUrl || "https://irembo.gov.rw/home/citizen/all_services")}" target="_blank" rel="noopener">Browse on Irembo</a>`;
+
+        detailEl.className = "detail";
+        detailEl.innerHTML = `
+          <h3>${esc(d.name)}</h3>
+          ${d.option && d.option !== d.name ? `<div class="hint">${esc(d.option)}</div>` : ""}
+          <div class="chips">${chips}</div>
+          ${switcher}
+          ${d.about ? `<h4>About</h4><p>${esc(d.about)}</p>` : ""}
+          ${d.applicants && d.applicants.length ? `<h4>Who can apply</h4><p>${esc(d.applicants.join(", "))}</p>` : ""}
+          ${listBlock("Required attachments", d.required)}
+          ${listBlock("Other attachments that may be requested", d.other)}
+          ${listBlock("Optional attachments", d.optional)}
+          ${notes}
+          <div class="actions">${apply}
+            <a class="ghost" href="${esc(d.listUrl || "https://irembo.gov.rw/home/citizen/all_services")}" target="_blank" rel="noopener">All Irembo services</a>
+          </div>`;
+
+        const sel = document.getElementById("opt");
+        if (sel) sel.addEventListener("change", (e) => open(d.id, Number(e.target.value)));
+      }
+
+      search(true);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "rembo-irembo-scraper",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Search Irembo services and fetch their requirements, fees and duration live.",
+  "scripts": {
+    "setup": "playwright install chromium",
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "playwright": "^1.49.1"
+  }
+}
